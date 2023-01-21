@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # get 'home/index'
-
-  get '/home' => 'home#index'
+  root 'home#index'      #home-controller,index-action    
+# get '/home' => 'home#index'
+  get 'about', to: 'page#about'
 end
