@@ -1,4 +1,5 @@
 class Student < ApplicationRecord
+	before_save { self.studemail = studemail.downcase }
 	has_many :articles
 	validates :studname, presence: true,uniqueness: { case_sensitive: false }, length: {minimum: 3,maximum: 25}
 	
