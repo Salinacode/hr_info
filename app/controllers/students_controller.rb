@@ -5,6 +5,12 @@ class StudentsController<ApplicationController
 		@articles = @student.articles
 	end
 
+	def index
+    	@students = Student.all
+  	end
+
+
+
 	def new
 		@student = Student.new
 	end
