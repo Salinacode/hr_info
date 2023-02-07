@@ -1,7 +1,7 @@
 class StudentsController<ApplicationController
+	before_action :set_student, only: [:show, :edit, :update]
 
 	def show
-		@student = Student.find(params[:id])
 		@articles = @student.articles.paginate(page: params[:page], per_page: 3)
 	end
 
@@ -14,11 +14,10 @@ class StudentsController<ApplicationController
 	end
 
 	def edit
-		@student = Student.find(params[:id])
+		
 	end
 
 	def update
-		@student = Student.find(params[:id])
 		if @student.update(student_params)
       		flash[:notice] = "Your account information was successfully updated"
       		redirect_to @student
@@ -38,7 +37,13 @@ class StudentsController<ApplicationController
   	end
 
 	private
-	  def student_params
+	
+	def student_params
 	    params.require(:student).permit(:studname, :studemail, :password)
 	end
+
+	def set_student
+		@student = Student.find(params[:id])
+	end
+
 end
