@@ -2,14 +2,12 @@ class StudentsController<ApplicationController
 
 	def show
 		@student = Student.find(params[:id])
-		@articles = @student.articles
+		@articles = @student.articles.paginate(page: params[:page], per_page: 3)
 	end
 
 	def index
-    	@students = Student.all
+    	@students = Student.paginate(page: params[:page], per_page: 3)
   	end
-
-
 
 	def new
 		@student = Student.new
@@ -23,7 +21,7 @@ class StudentsController<ApplicationController
 		@student = Student.find(params[:id])
 		if @student.update(student_params)
       		flash[:notice] = "Your account information was successfully updated"
-      		redirect_to articles_path
+      		redirect_to @student
     	else
       		render 'edit'
       	end

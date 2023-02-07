@@ -2,7 +2,18 @@
 
 <%= gravatar_for @student, size: 200 %>
 
+<div class="text-center mt-4">
+	<%= link_to "Edit your profile", edit_student_path(@student), class: "btn btn-outline-info" %>
+</div>
+
 <h3 class="text-center mt-4">Articles</h3>
+
+<div class="flikr_pagination">
+  <%= will_paginate @articles, :container => false %>
+</div>
 
 <%= render 'articles/article' %>
 
+<div class="flikr_pagination mb-4">
+  <%= will_paginate @articles, :container => false %>
+</div>

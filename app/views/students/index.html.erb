@@ -1,5 +1,9 @@
 <h1 class="text-center mt-4">Alpha Bloggers</h1>
 
+<div class="flikr_pagination">
+  <%= will_paginate @students, :container => false %>
+</div>
+
 <div class="container">
   <% @students.each do |student| %>
     <div class="row justify-content-md-center">
@@ -23,4 +27,8 @@
       </div>
     </div>
   <% end %>
+</div>
+
+<div class="flikr_pagination mb-4">
+  <%= will_paginate @articles, :container => false %>
 </div>
