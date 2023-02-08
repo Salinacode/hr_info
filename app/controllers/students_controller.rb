@@ -1,7 +1,7 @@
 class StudentsController<ApplicationController
-	before_action :set_student, only: [:show, :edit, :update]
+	before_action :set_student, only: [:show, :edit, :update, :destroy]
 	before_action :require_student, only: [:edit, :update]
-  	before_action :require_same_student, only: [:edit, :update]
+  	before_action :require_same_student, only: [:edit, :update, :destroy]
 
 	def show
 		@articles = @student.articles.paginate(page: params[:page], per_page: 3)
@@ -37,6 +37,13 @@ class StudentsController<ApplicationController
 	      render 'new'
 	    end
   	end
+
+  	def destroy
+	    @student.destroy
+	    session[:student_id] = nil
+	    flash[:notice] = "Account and all associated articles successfully deleted"
+	    redirect_to articles_path
+	end
 
 	private
 	
