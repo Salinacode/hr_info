@@ -1,5 +1,7 @@
 class StudentsController<ApplicationController
 	before_action :set_student, only: [:show, :edit, :update]
+	before_action :require_student, only: [:edit, :update]
+  	before_action :require_same_student, only: [:edit, :update]
 
 	def show
 		@articles = @student.articles.paginate(page: params[:page], per_page: 3)
@@ -44,6 +46,13 @@ class StudentsController<ApplicationController
 
 	def set_student
 		@student = Student.find(params[:id])
+	end
+
+	def require_same_student
+	    if current_student != @student
+	      flash[:alert] = "You can only edit your own account"
+	      redirect_to @student
+	    end
 	end
 
 end
