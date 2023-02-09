@@ -72,7 +72,7 @@ class ArticlesController < ApplicationController
     end
 
     def require_same_student
-      if current_student != @article.student
+      if current_student != @article.student && !current_student.admin?
         flash[:alert] = "You can only edit or delete your own article"
         redirect_to @article
       end

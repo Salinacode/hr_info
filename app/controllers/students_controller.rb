@@ -40,7 +40,7 @@ class StudentsController<ApplicationController
 
   	def destroy
 	    @student.destroy
-	    session[:student_id] = nil
+	    session[:student_id] = nil if @student == current_student
 	    flash[:notice] = "Account and all associated articles successfully deleted"
 	    redirect_to articles_path
 	end
@@ -56,8 +56,8 @@ class StudentsController<ApplicationController
 	end
 
 	def require_same_student
-	    if current_student != @student
-	      flash[:alert] = "You can only edit your own account"
+	    if current_student != @student && !current_student.admin?
+	      flash[:alert] = "You can only edit or delete  your own account"
 	      redirect_to @student
 	    end
 	end
