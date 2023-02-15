@@ -8,8 +8,7 @@ class SessionsController < ApplicationController
     
     if student && student.authenticate(params[:session][:password])
       session[:student_id] = student.id
-      flash[:notice] = "Logged in successfully"
-      redirect_to student
+      redirect_to student, notice: 'Logged in successfully'
     else
       flash.now[:alert] = "There was something wrong with your login details"
       render 'new'
@@ -18,8 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:student_id] = nil
-    flash[:notice] = "Logged out"
-    redirect_to root_path
+    redirect_to root_path, notice: 'Logged out'
   end
 
 end

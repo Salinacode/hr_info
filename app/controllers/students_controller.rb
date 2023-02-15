@@ -21,8 +21,7 @@ class StudentsController<ApplicationController
 
 	def update
 		if @student.update(student_params)
-      		flash[:notice] = "Your account information was successfully updated"
-      		redirect_to @student
+      		redirect_to @student, notice: "Your account information was successfully updated"
     	else
       		render 'edit'
       	end
@@ -31,8 +30,7 @@ class StudentsController<ApplicationController
 	def create
 	    @student = Student.new(student_params)
 	    if @student.save
-	      flash[:notice] = "Welcome to the Alpha Blog #{@student.studname}, you have successfully signed up"
-	      redirect_to articles_path
+	      redirect_to articles_path, notice: "Welcome to the Alpha Blog #{@student.studname}, you have successfully signed up"	      
 	    else
 	      render 'new'
 	    end
@@ -41,8 +39,7 @@ class StudentsController<ApplicationController
   	def destroy
 	    @student.destroy
 	    session[:student_id] = nil if @student == current_student
-	    flash[:notice] = "Account and all associated articles successfully deleted"
-	    redirect_to articles_path
+	    redirect_to articles_path, notice: "Account and all associated articles successfully deleted"
 	end
 
 	private
